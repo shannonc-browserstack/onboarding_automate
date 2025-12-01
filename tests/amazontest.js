@@ -23,10 +23,6 @@ describe ('Amazon Order Placement Script', () => {
             console.log('-------> Continue Shopping button clicked.');
             await browser.pause(200);
         }
-        //test if container is viewable
-        /*const searchContainer = await $('#nav-search-bar-form');
-        await searchContainer.waitForExist({ timeout: 10000 }); 
-        console.log('-------> Search container is confirmed to exist.');*/
 
         // --- Step 2: Search for a product ---
         let searchInput = await $(selectors.searchBox);
@@ -49,15 +45,11 @@ describe ('Amazon Order Placement Script', () => {
         console.log('-------> Applied filter: selector.filter1');
 
         const sortDropdown = await $('#s-result-sort-select');
-        //await sortDropdown.click();
-        //await selectors.sortOption.click();
         await sortDropdown.selectByAttribute('value', selectors.sortOption);
         console.log(`-------> Sorted results by: ${selectors.sortOption}.`);
 
         // --- Step 4: Extract info for console list ---
         await browser.pause(3000);
-        //const productElements = await $$('.s-result-item[data-asin]');
-        //console.log('--------------------> this is my array length '+ productElements.length);
 
         const rawProductContainers = await $$('.s-result-item.s-asin[data-asin]');
         const allProductContainers = Array.from(rawProductContainers);
@@ -67,16 +59,11 @@ describe ('Amazon Order Placement Script', () => {
         // 1. Define the asynchronous filter logic
         const filterPromises = allProductContainers.map(async (element) => {
             try {
-                // Check if the primary link element exists within the container
                 const linkElement = await element.$('a.a-link-normal.s-line-clamp-2');
-                
-                // If the link element is found, this returns true, keeping the element.
-                // If it's not found, many scrapers throw an error, which the catch block handles.
+
                 return !!linkElement; 
 
             } catch (e) {
-                // Catches the "no such element" error thrown by the scraping library
-                // when the link is missing. Returns false, discarding the element.
                 return false;
             }
         });
@@ -101,13 +88,6 @@ describe ('Amazon Order Placement Script', () => {
                     console.log('-----------> Extracting product info...');
                     const linkElement = await element.$('a.s-line-clamp-2');
 
-                    /*if (!linkElement) {
-                        console.log('--------------------->Skipping product: Main link element not found.');
-                        continue; 
-                    }*/
-
-                    //const titleElement = await element.$('h2');
-                    //const productName = await titleElement.getText();
                     const productName = await (linkElement.getText()).trim();
                     console.log('-----name------>'+productName);
 
