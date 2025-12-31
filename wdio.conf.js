@@ -13,8 +13,8 @@ export const config = {
     // should work too though). These services define specific user and key (or access key)
     // values you need to put in here in order to connect to these services.
     //
-    user: process.env.shannonchan_xh8fop,
-    key: process.env.DFX5GVLre4FZf3Ci46fg,
+    //user: process.env.,
+   // key: process.env,
     //
     // If you run your tests on Sauce Labs you can specify the region you want to run your tests
     // in via the `region` property. Available short handles for regions are `us` (default) and `eu`.
