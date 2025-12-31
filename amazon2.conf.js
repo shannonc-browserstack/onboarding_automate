@@ -1,6 +1,6 @@
 exports.config = {
-  user: process.env.BROWSERSTACK_USERNAME || 'shannonchan_xh8Fop',
-  key: process.env.BROWSERSTACK_ACCESS_KEY || 'DFX5GVLre4FZf3Ci46fg',
+  user: process.env.BROWSERSTACK_USERNAME,
+  key: process.env.BROWSERSTACK_ACCESS_KEY,
   hostname: 'hub.browserstack.com',
   mochaOpts: {
         ui: 'bdd',
